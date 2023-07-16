@@ -1,0 +1,16 @@
+package SnakePackage;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+			GameScreen exe= new GameScreen(20,50);
+			while(true)
+			{
+				exe.show();
+				exe.execute();
+			}
+	}
+
+}

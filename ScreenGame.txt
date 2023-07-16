@@ -1,0 +1,89 @@
+package SnakePackage;
+import java.util.Scanner;
+public class GameScreen {
+	String direction = "right";
+			Scanner keyb= new Scanner(System.in);
+			int height,length;
+			Snake s;
+			char[][] screen;
+			Fruit f;
+			
+			public GameScreen(int x,int y) {
+				length = x;
+				height = y;
+				screen= new char[x][y];
+				s = new Snake((int)x/2,(int)y/2);
+				f = new Fruit();
+				do {
+					f.genFruit(length, height);
+				}while(TestF());
+				
+			}
+			
+			public void execute(){
+				char d = keyb.next().charAt(0);
+				if (d=='r' && direction !="left"){
+					s.goRight(screen);
+					direction ="right";
+				}
+				if (d=='l' && direction !="right") {
+					s.goLeft(screen);
+					direction ="left";
+				}
+				if (d=='u' && direction !="down") {
+					s.goUp(screen);
+					direction ="up";
+				}
+				if (d=='d' && direction !="up" ) {
+					s.goDown(screen);
+					direction ="down";				}
+				if (s.SnakeTab[0][0]==f.a && s.SnakeTab[0][1]==f.b) {
+					do {
+						f.genFruit(length, height);
+					}while(TestF());
+					screen[f.a][f.b] = 'F';
+				}
+				
+			}
+			public void show() {
+				
+				for (int i=0;i<length;i++) {
+					for(int j=0;j<height;j++) {
+						if(j==height-1 || j==0 || i==0 || i==length-1) {
+							screen[i][j]='#';
+						}
+						else if(f.a == i && f.b == j) {
+							screen[i][j] = 'F';
+						}
+						else {
+						screen[i][j]=' ';
+						}
+					}
+				}
+				
+				for(int k=0;k<s.SnakeLenght;k++) {
+					screen[s.SnakeTab[k][0]][s.SnakeTab[k][1]]='0';
+				}
+				for(int i=0;i<length;i++) {
+					for(int j=0;j<height;j++) {
+						System.out.print(screen[i][j]);
+					}
+					System.out.println("");
+				}
+		       System.out.println("SCORE : "+(s.SnakeLenght-3)*10);
+			}
+			
+			public boolean TestF() {
+				boolean result = false;
+				if(f.a == length-1 || f.a == 0 || f.b == height-1 || f.b == 0) {
+					result = true;
+					return result;
+				}
+				for(int i = 0; i < s.SnakeLenght;i++) {
+					if(f.a == s.SnakeTab[i][0] && f.b == s.SnakeTab[i][1]) {
+						result = true;
+					}
+				}
+				return result;
+			}
+}

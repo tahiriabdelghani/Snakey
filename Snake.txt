@@ -1,0 +1,93 @@
+package SnakePackage;
+
+public class Snake {
+	int SnakeTab[][];
+	int SnakeLenght;
+	public Snake(int a, int b) {
+		SnakeTab = new int[100][2];
+        SnakeTab[0][0]=a;
+        SnakeTab[0][1]=b;
+        SnakeTab[1][0]=a;
+        SnakeTab[1][1]=b-1;
+        SnakeTab[2][0]=a;
+        SnakeTab[2][1]=b-2;
+        SnakeLenght = 3;    
+	}
+	public void grow (){
+        for (int k=SnakeLenght; k>0 ; --k) {
+            SnakeTab[k][0]=SnakeTab[k-1][0];
+            SnakeTab[k][1]=SnakeTab[k-1][1];
+            }
+        SnakeLenght=SnakeLenght+1;
+	}
+	public void follow (){
+	     for (int k=SnakeLenght-1; k>0 ; --k) {
+	         SnakeTab[k][0]=SnakeTab[k-1][0];
+	         SnakeTab[k][1]=SnakeTab[k-1][1];
+	            }
+	       }
+	public void goUp(char[][] screen) {
+		if(screen[SnakeTab[0][0]-1][SnakeTab[0][1]]=='F') {
+			grow();
+			SnakeTab[0][0]=SnakeTab[0][0]-1;
+		}
+		else if(screen[SnakeTab[0][0]-1][SnakeTab[0][1]]!=' ') {
+			die();
+		}
+		else {
+			follow();
+			SnakeTab[0][0]=SnakeTab[0][0]-1;
+		}
+		
+	}
+	public void goDown(char[][] screen) {
+		if(screen[SnakeTab[0][0]+1][SnakeTab[0][1]]=='F') {
+			grow();
+			SnakeTab[0][0]=SnakeTab[0][0]+1;
+		}
+		else if(screen[SnakeTab[0][0]+1][SnakeTab[0][1]]!=' ') {
+			die();
+		}
+		else {
+			follow();
+			SnakeTab[0][0]=SnakeTab[0][0]+1;
+		}
+	}
+	public void goLeft(char[][] screen) {
+		if(screen[SnakeTab[0][0]][SnakeTab[0][1]-1]=='F') {
+			grow();
+			SnakeTab[0][1]=SnakeTab[0][1]-1;
+		}
+		else if(screen[SnakeTab[0][0]][SnakeTab[0][1]-1]!=' ') {
+			die();
+		}
+		else {
+			follow();
+			SnakeTab[0][1]=SnakeTab[0][1]-1;
+		}
+		
+		
+	}
+	public void goRight(char[][] screen) {
+		if(screen[SnakeTab[0][0]][SnakeTab[0][1]+1]=='F') {
+			grow();
+			SnakeTab[0][1]=SnakeTab[0][1]+1;
+		}
+		else if(screen[SnakeTab[0][0]][SnakeTab[0][1]+1]!=' ') {
+			die();
+		}
+		else {
+			follow();
+			SnakeTab[0][1]=SnakeTab[0][1]+1;
+		}
+		
+	}
+	public void die() {
+		System.out.println("GAME OVER!");
+	       System.out.println("YOU SCORE IS: "+( SnakeLenght-3)*10);
+	       System.out.println("THIS GAME WAS MADE BY: MOUAD ESSALIHI, ZAIDI HICHAM, SANAE ELMADANI AND ABDELGHANI TAHIRI");
+	       System.out.println("ALL RIGHTS RESERVED!! LOL");
+			System.exit(1);
+	}
+
+}

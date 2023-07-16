@@ -1,0 +1,21 @@
+package SnakePackage;
+import java.util.Random;
+public class Fruit {
+	int a,b;
+	
+	public Fruit() {
+		// des valeurs par defauts pour l initialisation
+		a=3;
+		b=3;
+				
+		}
+		
+	public void genFruit(int x, int y) {
+		Random rand = new Random();
+		a = rand.nextInt(x);
+		a=a+1;
+		b = rand.nextInt(y);
+		b=b+1;
+		}	
+
+}
